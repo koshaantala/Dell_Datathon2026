@@ -1,0 +1,168 @@
+# All English wording on the website. Edit freely; the page reloads with `make dev`.
+# Spanish lives in site.es.yaml. Anything missing there falls back to this file.
+# Text in {curly braces} is filled in by the site. Keep those words as they are.
+
+brand:
+  name: HighGround
+  tagline: Know before you book. Know before the river does.
+
+nav:
+  home: Check a stay
+  watch: Night Watch
+  about: About the data
+  language_switch: Español
+
+footer:
+  disclaimer: >-
+    HighGround is a student prototype. It does not replace official warnings.
+    In an emergency call 911 and follow local officials.
+  credits: >-
+    Aerial imagery: NOAA National Geodetic Survey (CC0). FEMA, USGS and terrain data
+    as recorded in the UTSA Texas Flood Student Data.
+
+home:
+  title: Is this riverside stay a good idea?
+  lead: >-
+    Pick a cabin, campsite or rental on the Guadalupe River between Hunt and Comfort.
+    We'll show its flood risk, why, and how to get out if the river rises.
+  map_hint: Click the map near the river, or pick a highlighted square.
+  coverage_note: >-
+    Coverage today: {count} assessed spots along the Guadalupe in Kerr and Kendall
+    counties. More places are coming.
+  why_title: Why this matters
+  why_points:
+    - Hill Country rivers can rise many feet in under an hour, often at night.
+    - FEMA maps miss some risky places, and few people read them before booking.
+    - Rain miles upstream is what floods you. Knowing your upstream gauge buys time.
+
+report:
+  title: Stay report
+  based_on: >-
+    Based on the nearest assessed spot, {distance_m:.0f} m from your pin
+    ({locality}).
+  outside_coverage_title: We don't have data for this spot yet
+  outside_coverage_body: >-
+    Your pin is more than {max_km:.1f} km from any spot we've assessed.
+    Try a place closer to the highlighted squares on the map.
+  score_label: Flood risk
+  score_of: "{points} of {available} points"
+  why_title: Why this score
+  not_checked_title: Not checked yet
+  summary_title: In plain words
+  summary_loading: Writing a plain-language summary…
+  upstream_title: Upstream warning
+  upstream_has_gauge: >-
+    Your nearest river gauge is {gauge_name}, {gauge_km:.1f} km away.
+    The next gauge upstream is {upstream_name}. A fast rise there reaches you later.
+  upstream_none: >-
+    Your nearest river gauge is {gauge_name}, {gauge_km:.1f} km away. We have no
+    gauge further upstream, so watch rainfall alerts closely.
+  live_title: Right now
+  live_loading: Checking live alerts and river levels…
+  live_unavailable: >-
+    Live data isn't available right now. Check weather.gov and waterdata.usgs.gov.
+  live_no_alerts: No active weather alerts for this spot.
+  live_gauge: "{gauge_name}: {value} {unit} at {time}"
+  photo_title: What this spot looked like after July 2025
+  photo_caption: "NOAA aerial photo, {date}. {notes}"
+  photo_link: View this spot in NOAA's July 2025 imagery
+  questions_title: Questions to ask your host
+  questions:
+    - Is there a second way out if the low-water crossing floods?
+    - Is there a weather radio or flood siren on the property?
+    - Where is the nearest higher ground we can walk to at night?
+    - Has this property flooded before? When?
+  actions:
+    plan: Make my escape plan
+    watch: Set up Night Watch
+    print: Print
+
+band_names:
+  Severe: Severe
+  High: High
+  Elevated: Elevated
+  Lower: Lower
+
+bands:
+  Severe: Severe risk. Think twice about staying here, especially overnight.
+  High: High risk. Have a plan and an alert before you sleep here.
+  Elevated: Elevated risk. Know your way out and watch the forecast.
+  Lower: Lower risk, not no risk. Keep alerts on.
+
+plan:
+  title: My escape plan
+  lead: Print this or save it to your phone before you arrive. Signal is weak in river valleys.
+  steps_title: If the river starts rising
+  steps:
+    - Leave early. Do not wait to see the water.
+    - Go uphill on foot if roads are flooded. Never drive into water. Turn Around, Don't Drown.
+    - Take phones, medicine, shoes and a flashlight. Leave everything else.
+    - Call 911 once you are safe or if you are trapped. Get to the highest floor or roof.
+  before_title: Before you sleep here
+  before:
+    - Turn on Emergency Alerts in your phone settings.
+    - Find the higher ground you'd walk to, in daylight.
+    - Park facing the exit road.
+    - Know where everyone in your group sleeps.
+  gauge_title: Your river gauge
+  upstream_label: "Upstream gauge:"
+  contacts_title: Emergency contacts
+  # Add verified local numbers here (county emergency office, park office, host).
+  contacts:
+    - name: Emergency
+      number: "911"
+
+watch:
+  title: Night Watch
+  lead: >-
+    Flash floods often hit after dark. Night Watch is designed to wake you when a
+    flash flood warning covers your spot or the river upstream starts rising fast.
+  how_title: How it decides to wake you
+  rules_intro: An alert fires when any of these is true.
+  status: >-
+    Sign-up is not open yet. This hackathon version shows the rules and, once the
+    data is downloaded, replays the July 2025 flood.
+  replay_title: Replay July 2025
+  replay_missing: >-
+    Replay data hasn't been downloaded yet. On a computer with internet, run
+    `make replay`, then reload this page.
+  replay_alert: Night Watch would have alerted at {time}.
+  table:
+    gauge: River gauge
+    readings: Readings
+    first_rise: First fast rise
+
+about:
+  title: About the data
+  lead: What HighGround uses, and what it cannot tell you.
+  limits_title: Limits you should know
+  limits:
+    - The score covers {count} assessed spots, not every property. A pin is matched to the nearest spot within {max_km:.1f} km.
+    - FEMA zones are a current snapshot. Being outside a zone does not mean low risk.
+    - Height above low ground is measured within a ~275 m map tile, not to the exact riverbank.
+    - High-water marks show where flooding reached in July 2025. They are not flood depths.
+    - The plain-language summary is written by an AI model from the score. The score itself comes from fixed rules.
+  sources_title: Sources
+  sources:
+    - name: NOAA Emergency Response Imagery, July 2025 Hill Country floods
+      url: https://storms.ngs.noaa.gov/storms/2025_eri/index.html
+    - name: FEMA National Flood Hazard Layer
+      url: https://www.fema.gov/flood-maps/national-flood-hazard-layer
+    - name: USGS Water Data APIs (river gauges)
+      url: https://api.waterdata.usgs.gov
+    - name: National Weather Service API (alerts)
+      url: https://www.weather.gov/documentation/services-web-api
+    - name: UTSA Texas Flood Student Data (consolidated November 2026)
+      url: ""
+
+errors:
+  title: Something went wrong
+  not_found: We couldn't find that page or place.
+  back: Back to the map
+
+# Map settings (not wording, but kept here so they're easy to change).
+map:
+  tile_url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+  attribution: "&copy; OpenStreetMap contributors"
+  center: [30.03, -99.17]
+  zoom: 11

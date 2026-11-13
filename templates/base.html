@@ -1,0 +1,45 @@
+{#- Shared layout for every page. Wording comes from `t` (content/site.*.yaml). -#}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ t.brand.name }}{% endblock %} · {{ t.brand.name }}</title>
+  <meta name="description" content="{{ t.brand.tagline }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="page-{{ page | default('other') }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M3 24 L12 10 L17 17 L21 12 L29 24 Z" fill="currentColor"/>
+          <path d="M2 27 q4 -3 8 0 t8 0 t8 0 t6 0" fill="none" stroke="var(--river)" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span>{{ t.brand.name }}</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/" {% if page == 'home' %}aria-current="page"{% endif %}>{{ t.nav.home }}</a>
+        <a href="/watch" {% if page == 'watch' %}aria-current="page"{% endif %}>{{ t.nav.watch }}</a>
+        <a href="/about" {% if page == 'about' %}aria-current="page"{% endif %}>{{ t.nav.about }}</a>
+        <a class="lang-switch" href="{{ switch_url }}" hreflang="{{ 'en' if lang == 'es' else 'es' }}">{{ t.nav.language_switch }}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="disclaimer">{{ t.footer.disclaimer }}</p>
+      <p class="credits">{{ t.footer.credits }}</p>
+    </div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

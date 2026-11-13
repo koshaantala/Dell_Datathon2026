@@ -1,0 +1,26 @@
+# USGS river gauges on the Guadalupe, listed upstream to downstream.
+# Order matters: the gauge listed before a site's gauge is its "upstream" gauge.
+# latitude/longitude are filled by `make gauges` (needs internet); blank = not on the map.
+
+river: Guadalupe River
+gauges:
+  - id: USGS-08165500
+    name: Guadalupe River at Hunt
+    latitude:
+    longitude:
+  - id: USGS-08166140
+    name: Guadalupe River above Bear Creek at Kerrville
+    latitude:
+    longitude:
+  - id: USGS-08166200
+    name: Guadalupe River at Kerrville
+    latitude:
+    longitude:
+  - id: USGS-08166250
+    name: Guadalupe River near Center Point
+    latitude:
+    longitude:
+  - id: USGS-08167000
+    name: Guadalupe River at Comfort
+    latitude:
+    longitude:

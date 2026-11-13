@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% set site = report.site %}
+{% set score = report.score %}
+{% block title %}{{ t.report.title }} · {{ site.locality }}{% endblock %}
+{% block head %}{% include "partials/map_assets.html" %}{% endblock %}
+
+{% block content %}
+<article class="report"
+         data-site="{{ site.id }}" data-lang="{{ lang }}"
+         data-live-enabled="{{ 'true' if live_enabled else 'false' }}">
+
+  <header class="report-header">
+    <div>
+      <p class="eyebrow">{{ t.report.title }}</p>
+      <h1>{{ site.locality }}</h1>
+      <p class="muted">{{ site.county }}{% if distance_m is not none %} · {{ t.report.based_on | fill(distance_m=distance_m, locality=site.locality) }}{% endif %}</p>
+    </div>
+    {% include "partials/score_badge.html" %}
+  </header>
+
+  <p class="band-message" style="--band: {{ score.band.color }}">{{ t.bands[score.band.name] }}</p>
+
+  <div class="report-grid">
+    <div class="report-main">
+      <section class="card">
+        <h2>{{ t.report.summary_title }}</h2>
+        <p id="summary" class="summary" data-loading="{{ t.report.summary_loading }}">{{ report.fallback_summary }}</p>
+      </section>
+
+      <section class="card">
+        <h2>{{ t.report.why_title }}</h2>
+        <ul class="factor-list">
+          {% for factor in score.checked %}
+          <li class="factor">
+            <div class="factor-head">
+              <span class="factor-label">{{ factor.label }}</span>
+              <span class="factor-points">{{ factor.points }}/{{ factor.max_points }}</span>
+            </div>
+            <div class="meter" role="img" aria-label="{{ factor.points }} of {{ factor.max_points }}">
+              <span style="width: {{ (100 * factor.points / factor.max_points) | round | int }}%"></span>
+            </div>
+            <p>{{ factor.text }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if score.not_checked %}
+        <h3 class="small-heading">{{ t.report.not_checked_title }}</h3>
+        <ul class="not-checked">
+          {% for factor in score.not_checked %}<li><strong>{{ factor.label }}.</strong> {{ factor.text }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </section>
+
+      <section class="card">
+        <h2>{{ t.report.upstream_title }}</h2>
+        {% if report.gauge %}
+          {% if report.upstream_gauge %}
+          <p>{{ t.report.upstream_has_gauge | fill(gauge_name=report.gauge.name, gauge_km=site.gauge_km or 0, upstream_name=report.upstream_gauge.name) }}</p>
+          {% else %}
+          <p>{{ t.report.upstream_none | fill(gauge_name=report.gauge.name, gauge_km=site.gauge_km or 0) }}</p>
+          {% endif %}
+          <p><a href="{{ report.gauge.usgs_url }}" rel="noopener" target="_blank">{{ report.gauge.name }} · USGS</a></p>
+        {% endif %}
+        <div id="live" class="live" hidden>
+          <h3 class="small-heading">{{ t.report.live_title }}</h3>
+          <p class="live-status"
+             data-loading="{{ t.report.live_loading }}"
+             data-unavailable="{{ t.report.live_unavailable }}"
+             data-no-alerts="{{ t.report.live_no_alerts }}"
+             data-gauge-template="{{ t.report.live_gauge }}"
+             data-gauge-name="{{ report.gauge.name if report.gauge else '' }}">{{ t.report.live_loading }}</p>
+          <ul class="live-alerts"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>{{ t.report.questions_title }}</h2>
+        <ul class="check-list">
+          {% for question in t.report.questions %}<li>{{ question }}</li>{% endfor %}
+        </ul>
+      </section>
+    </div>
+
+    <aside class="report-side">
+      <div id="site-map" class="map map-small"
+           data-tile-url="{{ t.map.tile_url }}"
+           data-attribution="{{ t.map.attribution }}"
+           data-bounds="{{ site.bounds | join(',') if site.bounds else '' }}"
+           data-lat="{{ site.latitude }}" data-lon="{{ site.longitude }}"></div>
+
+      <section class="card">
+        <h2>{{ t.report.photo_title }}</h2>
+        {% if report.has_image %}
+        <figure>
+          <img src="/api/images/{{ site.id }}" alt="{{ site.notes }}" loading="lazy">
+          <figcaption>{{ t.report.photo_caption | fill(date=site.acquisition_date, notes=site.notes) }}</figcaption>
+        </figure>
+        {% else %}
+        <p class="muted">{{ site.notes }}</p>
+        {% endif %}
+        {% if site.source_url %}
+        <p><a href="{{ site.source_url }}" rel="noopener" target="_blank">{{ t.report.photo_link }}</a></p>
+        {% endif %}
+        <p class="tiny">{{ site.attribution }} · {{ site.reuse }}</p>
+      </section>
+
+      <div class="actions">
+        <a class="button primary" href="/plan?site={{ site.id }}">{{ t.report.actions.plan }}</a>
+        <a class="button" href="/watch?site={{ site.id }}">{{ t.report.actions.watch }}</a>
+      </div>
+    </aside>
+  </div>
+</article>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='js/report.js') }}" defer></script>
+{% endblock %}

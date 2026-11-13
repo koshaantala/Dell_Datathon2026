@@ -1,0 +1,117 @@
+# Stay Score rules. Edit thresholds and wording here; no code changes needed.
+# Each factor adds points. The band comes from the share of points available,
+# so factors we cannot measure yet never make a place look safer.
+#
+# After editing, run `make test` to check the file still loads.
+
+factors:
+  fema_zone:
+    label:
+      en: FEMA flood zone
+      es: Zona de inundación de FEMA
+    max_points: 4
+    # Matched against the FEMA zone subtype first, then the zone code.
+    levels:
+      - match: FLOODWAY
+        points: 4
+        text:
+          en: "In the FEMA floodway, where floodwater flows fastest."
+          es: "En el cauce de alivio de FEMA, donde el agua corre más rápido."
+      - match: [AE, A, AO, AH, VE, V]
+        points: 3
+        text:
+          en: "In the FEMA 100-year floodplain."
+          es: "En la llanura de inundación de 100 años de FEMA."
+      - match: "0.2 PCT ANNUAL CHANCE FLOOD HAZARD"
+        points: 1
+        text:
+          en: "In the FEMA 500-year floodplain."
+          es: "En la llanura de inundación de 500 años de FEMA."
+      - match: [X, "AREA OF MINIMAL FLOOD HAZARD"]
+        points: 0
+        text:
+          en: "Outside mapped FEMA flood zones. That does not mean no risk."
+          es: "Fuera de las zonas de inundación de FEMA. Eso no significa que no haya riesgo."
+
+  height_above_low_ground:
+    label:
+      en: Height above the lowest nearby ground
+      es: Altura sobre el terreno bajo cercano
+    max_points: 4
+    # Metres between this spot and the lowest ground in its ~275 m map tile.
+    # The river is usually that lowest ground. Checked from the top down.
+    levels:
+      - below_m: 3
+        points: 4
+        text:
+          en: "Only {value:.1f} m above the lowest nearby ground."
+          es: "Solo {value:.1f} m sobre el terreno más bajo cercano."
+      - below_m: 10
+        points: 2
+        text:
+          en: "{value:.1f} m above the lowest nearby ground."
+          es: "{value:.1f} m sobre el terreno más bajo cercano."
+      - below_m: .inf
+        points: 0
+        text:
+          en: "{value:.1f} m above the lowest nearby ground."
+          es: "{value:.1f} m sobre el terreno más bajo cercano."
+
+  high_water_mark:
+    label:
+      en: July 2025 high-water mark nearby
+      es: Marca de nivel máximo de julio de 2025 cercana
+    max_points: 2
+    # Distance to the nearest surveyed high-water mark from the July 2025 floods.
+    levels:
+      - within_km: 0.5
+        points: 2
+        text:
+          en: "A July 2025 high-water mark was surveyed {value_m:.0f} m away."
+          es: "Se midió una marca de nivel máximo de julio de 2025 a {value_m:.0f} m."
+      - within_km: 2.0
+        points: 1
+        text:
+          en: "A July 2025 high-water mark was surveyed {value_km:.1f} km away."
+          es: "Se midió una marca de nivel máximo de julio de 2025 a {value_km:.1f} km."
+      - within_km: .inf
+        points: 0
+        text:
+          en: "No July 2025 high-water mark within 2 km."
+          es: "No hay marcas de nivel máximo de julio de 2025 a menos de 2 km."
+
+  # Planned factors. They show as "not checked yet" and are left out of the band
+  # until the data is added (see README, "Adding a new factor").
+  way_out:
+    label:
+      en: Dry route out
+      es: Ruta de salida seca
+    max_points: 2
+    planned: true
+    text:
+      en: "Needs road and low-water crossing data."
+      es: "Requiere datos de caminos y cruces bajos."
+  walk_to_higher_ground:
+    label:
+      en: Walk to higher ground
+      es: Caminata a terreno alto
+    max_points: 2
+    planned: true
+    text:
+      en: "Needs a full terrain model."
+      es: "Requiere un modelo de terreno completo."
+
+# Bands by share of available points, checked from the top down.
+bands:
+  - name: Severe
+    min_share: 0.75
+    color: "#9b1c1c"
+  - name: High
+    min_share: 0.5
+    color: "#c2410c"
+  - name: Elevated
+    min_share: 0.25
+    color: "#b45309"
+  - name: Lower
+    min_share: 0.0
+    color: "#3f6212"

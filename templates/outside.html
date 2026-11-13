@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ t.report.outside_coverage_title }}{% endblock %}
+{% block content %}
+<section class="narrow">
+  <h1>{{ t.report.outside_coverage_title }}</h1>
+  <p class="lead">{{ t.report.outside_coverage_body | fill(max_km=max_snap_km) }}</p>
+  <p><a class="button primary" href="/">{{ t.errors.back }}</a></p>
+</section>
+{% endblock %}

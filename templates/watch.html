@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ t.watch.title }}{% endblock %}
+
+{% block content %}
+<section class="narrow">
+  <p class="eyebrow">{{ t.nav.watch }}</p>
+  <h1>{{ t.watch.title }}{% if site %} · {{ site.locality }}{% endif %}</h1>
+  <p class="lead">{{ t.watch.lead }}</p>
+
+  <section class="card">
+    <h2>{{ t.watch.how_title }}</h2>
+    <p>{{ t.watch.rules_intro }}</p>
+    <ol class="rules">{% for rule in rules_text %}<li>{{ rule }}</li>{% endfor %}</ol>
+    <p class="notice">{{ t.watch.status }}</p>
+  </section>
+
+  <section class="card">
+    <h2>{{ t.watch.replay_title }}</h2>
+    {% if not replay_available %}
+      <p class="muted">{{ t.watch.replay_missing }}</p>
+    {% else %}
+      <table class="data-table">
+        <thead><tr><th>{{ t.watch.table.gauge }}</th><th>{{ t.watch.table.readings }}</th><th>{{ t.watch.table.first_rise }}</th></tr></thead>
+        <tbody>
+        {% for row in replay_rows %}
+          <tr>
+            <td>{{ row.gauge.name }}</td>
+            <td>{{ row.readings }}</td>
+            <td>{{ t.watch.replay_alert | fill(time=row.alert_at.strftime('%b %d %H:%M %Z')) if row.alert_at else '—' }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </section>
+
+  {% if site %}<p><a class="button" href="/report?site={{ site.id }}">← {{ t.report.title }}</a></p>{% endif %}
+</section>
+{% endblock %}

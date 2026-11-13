@@ -1,0 +1,23 @@
+# Night Watch alert rules. Thresholds are starting assumptions for the prototype:
+# tune them against the July 2025 replay before trusting them.
+
+# National Weather Service alert types that always trigger an alert.
+nws_events:
+  - Flash Flood Emergency
+  - Flash Flood Warning
+  - Flood Warning
+
+# River rise rules, in feet of gauge height per hour (USGS parameter 00065).
+upstream_rise_ft_per_hour: 2.0
+local_rise_ft_per_hour: 1.0
+
+# Plain-language versions shown on the Night Watch page.
+rules_text:
+  en:
+    - "The National Weather Service issues a {events} that covers your spot."
+    - "The gauge upstream of you rises more than {upstream_rise_ft_per_hour} ft in an hour."
+    - "Your nearest gauge rises more than {local_rise_ft_per_hour} ft in an hour."
+  es:
+    - "El Servicio Meteorológico Nacional emite un aviso ({events}) que cubre su lugar."
+    - "El medidor río arriba sube más de {upstream_rise_ft_per_hour} pies en una hora."
+    - "Su medidor más cercano sube más de {local_rise_ft_per_hour} pies en una hora."

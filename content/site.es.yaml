@@ -1,0 +1,147 @@
+# Texto en español. Cualquier clave que falte aquí se toma de site.en.yaml.
+# Have a native speaker review before the demo.
+
+brand:
+  tagline: Infórmate antes de reservar. Infórmate antes que el río.
+
+nav:
+  home: Revisar un lugar
+  watch: Vigilancia nocturna
+  about: Sobre los datos
+  language_switch: English
+
+footer:
+  disclaimer: >-
+    HighGround es un prototipo estudiantil. No reemplaza los avisos oficiales.
+    En una emergencia llame al 911 y siga a las autoridades locales.
+  credits: >-
+    Imágenes aéreas: NOAA National Geodetic Survey (CC0). Datos de FEMA, USGS y del
+    terreno según los UTSA Texas Flood Student Data.
+
+home:
+  title: ¿Es buena idea hospedarse junto a este río?
+  lead: >-
+    Elija una cabaña, campamento o alquiler en el río Guadalupe entre Hunt y Comfort.
+    Le mostraremos su riesgo de inundación, por qué, y cómo salir si el río sube.
+  map_hint: Haga clic en el mapa cerca del río o elija un cuadro resaltado.
+  coverage_note: >-
+    Cobertura actual: {count} lugares evaluados a lo largo del Guadalupe en los
+    condados de Kerr y Kendall.
+  why_title: Por qué importa
+  why_points:
+    - Los ríos del Hill Country pueden subir varios pies en menos de una hora, a menudo de noche.
+    - Los mapas de FEMA no muestran todos los lugares de riesgo.
+    - La lluvia río arriba es la que lo inunda. Conocer su medidor río arriba le da tiempo.
+
+report:
+  title: Informe del lugar
+  based_on: >-
+    Basado en el lugar evaluado más cercano, a {distance_m:.0f} m de su marcador
+    ({locality}).
+  outside_coverage_title: Aún no tenemos datos para este lugar
+  outside_coverage_body: >-
+    Su marcador está a más de {max_km:.1f} km de cualquier lugar evaluado.
+  score_label: Riesgo de inundación
+  score_of: "{points} de {available} puntos"
+  why_title: Por qué este puntaje
+  not_checked_title: Aún no revisado
+  summary_title: En palabras sencillas
+  summary_loading: Escribiendo un resumen sencillo…
+  upstream_title: Aviso río arriba
+  upstream_has_gauge: >-
+    Su medidor del río más cercano es {gauge_name}, a {gauge_km:.1f} km.
+    El siguiente medidor río arriba es {upstream_name}. Una subida rápida allí le llega después.
+  upstream_none: >-
+    Su medidor del río más cercano es {gauge_name}, a {gauge_km:.1f} km. No tenemos
+    un medidor más arriba, así que siga de cerca las alertas de lluvia.
+  live_gauge: "{gauge_name}: {value} {unit} a las {time}"
+  photo_caption: "Foto aérea de NOAA, {date}. {notes}"
+  live_title: Ahora mismo
+  live_loading: Revisando alertas y niveles del río…
+  live_unavailable: >-
+    Los datos en vivo no están disponibles. Consulte weather.gov y waterdata.usgs.gov.
+  live_no_alerts: No hay alertas meteorológicas activas para este lugar.
+  photo_title: Así se veía este lugar después de julio de 2025
+  photo_link: Ver este lugar en las imágenes de NOAA de julio de 2025
+  questions_title: Preguntas para su anfitrión
+  questions:
+    - ¿Hay una segunda salida si se inunda el cruce bajo?
+    - ¿Hay una radio meteorológica o sirena de inundación en la propiedad?
+    - ¿Dónde está el terreno alto más cercano al que podemos caminar de noche?
+    - ¿Se ha inundado esta propiedad antes? ¿Cuándo?
+  actions:
+    plan: Crear mi plan de escape
+    watch: Activar vigilancia nocturna
+    print: Imprimir
+
+band_names:
+  Severe: Severo
+  High: Alto
+  Elevated: Elevado
+  Lower: Menor
+
+bands:
+  Severe: Riesgo severo. Piénselo dos veces antes de quedarse aquí, sobre todo de noche.
+  High: Riesgo alto. Tenga un plan y una alerta antes de dormir aquí.
+  Elevated: Riesgo elevado. Conozca su salida y siga el pronóstico.
+  Lower: Riesgo menor, no ausencia de riesgo. Mantenga las alertas activadas.
+
+plan:
+  title: Mi plan de escape
+  lead: Imprímalo o guárdelo en su teléfono antes de llegar. La señal es débil en los valles.
+  steps_title: Si el río empieza a subir
+  steps:
+    - Salga temprano. No espere a ver el agua.
+    - Suba a pie si los caminos están inundados. Nunca maneje en el agua. Dé la vuelta, no se ahogue.
+    - Lleve teléfonos, medicinas, zapatos y una linterna. Deje todo lo demás.
+    - Llame al 911 cuando esté a salvo o si queda atrapado. Suba al piso más alto o al techo.
+  before_title: Antes de dormir aquí
+  before:
+    - Active las alertas de emergencia en la configuración de su teléfono.
+    - Ubique de día el terreno alto al que caminaría.
+    - Estacione mirando hacia el camino de salida.
+    - Sepa dónde duerme cada persona de su grupo.
+  gauge_title: Su medidor del río
+  upstream_label: "Medidor río arriba:"
+  contacts_title: Contactos de emergencia
+  contacts:
+    - name: Emergencia
+      number: "911"
+
+watch:
+  title: Vigilancia nocturna
+  how_title: Cómo decide despertarle
+  lead: >-
+    Las inundaciones repentinas suelen llegar de noche. La vigilancia nocturna está
+    diseñada para despertarle cuando un aviso de inundación cubre su lugar o el río
+    sube rápido río arriba.
+  rules_intro: Se envía una alerta cuando se cumple cualquiera de estas condiciones.
+  status: >-
+    La inscripción aún no está abierta. Esta versión muestra las reglas y, cuando se
+    descarguen los datos, repite la inundación de julio de 2025.
+  replay_title: Repetición de julio de 2025
+  replay_missing: >-
+    Los datos de la repetición aún no se han descargado. En una computadora con
+    internet, ejecute `make replay` y vuelva a cargar esta página.
+  replay_alert: La vigilancia nocturna habría alertado a las {time}.
+  table:
+    gauge: Medidor del río
+    readings: Lecturas
+    first_rise: Primera subida rápida
+
+about:
+  title: Sobre los datos
+  lead: Qué usa HighGround y qué no puede decirle.
+  limits_title: Límites que debe conocer
+  limits:
+    - El puntaje cubre {count} lugares evaluados, no todas las propiedades. Un marcador se asocia al lugar más cercano dentro de {max_km:.1f} km.
+    - Las zonas de FEMA son una foto actual. Estar fuera de una zona no significa bajo riesgo.
+    - La altura sobre el terreno bajo se mide dentro de un cuadro de ~275 m, no hasta la orilla exacta.
+    - Las marcas de nivel máximo muestran hasta dónde llegó el agua en julio de 2025. No son profundidades.
+    - El resumen sencillo lo escribe un modelo de IA a partir del puntaje. El puntaje sale de reglas fijas.
+  sources_title: Fuentes
+
+errors:
+  title: Algo salió mal
+  not_found: No encontramos esa página o lugar.
+  back: Volver al mapa

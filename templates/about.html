@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ t.about.title }}{% endblock %}
+
+{% block content %}
+<section class="narrow">
+  <h1>{{ t.about.title }}</h1>
+  <p class="lead">{{ t.about.lead }}</p>
+
+  <section class="card">
+    <h2>{{ t.about.limits_title }}</h2>
+    <ul>{% for limit in t.about.limits %}<li>{{ limit | fill(count=site_count, max_km=max_snap_km) }}</li>{% endfor %}</ul>
+  </section>
+
+  <section class="card">
+    <h2>{{ t.about.sources_title }}</h2>
+    <ul>
+      {% for source in t.about.sources %}
+      <li>{% if source.url %}<a href="{{ source.url }}" rel="noopener" target="_blank">{{ source.name }}</a>{% else %}{{ source.name }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+</section>
+{% endblock %}

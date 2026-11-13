@@ -1,0 +1,6 @@
+{#- Expects `score` (StayScore) and `t`. -#}
+<div class="score-badge" style="--band: {{ score.band.color }}">
+  <span class="score-label">{{ t.report.score_label }}</span>
+  <span class="score-band">{{ t.band_names[score.band.name] }}</span>
+  <span class="score-points">{{ t.report.score_of | fill(points=score.points, available=score.available) }}</span>
+</div>

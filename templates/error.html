@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ t.errors.title }}{% endblock %}
+{% block content %}
+<section class="narrow">
+  <h1>{{ t.errors.title }}</h1>
+  <p class="lead">{{ t.errors.not_found if status == 404 else detail }}</p>
+  <p><a class="button primary" href="/">{{ t.errors.back }}</a></p>
+</section>
+{% endblock %}

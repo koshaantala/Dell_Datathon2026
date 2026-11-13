@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% set site = report.site %}
+{% set score = report.score %}
+{% block title %}{{ t.plan.title }} · {{ site.locality }}{% endblock %}
+
+{% block content %}
+<article class="plan narrow">
+  <header class="report-header">
+    <div>
+      <p class="eyebrow">{{ t.plan.title }}</p>
+      <h1>{{ site.locality }}</h1>
+      <p class="muted">{{ t.plan.lead }}</p>
+    </div>
+    {% include "partials/score_badge.html" %}
+  </header>
+
+  <section class="card plan-steps">
+    <h2>{{ t.plan.steps_title }}</h2>
+    <ol>{% for step in t.plan.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+  </section>
+
+  <section class="card">
+    <h2>{{ t.plan.before_title }}</h2>
+    <ul class="check-list">{% for item in t.plan.before %}<li>{{ item }}</li>{% endfor %}</ul>
+  </section>
+
+  {% if report.gauge %}
+  <section class="card">
+    <h2>{{ t.plan.gauge_title }}</h2>
+    <p><strong>{{ report.gauge.name }}</strong> ({{ report.gauge.id }})</p>
+    <p class="tiny">{{ report.gauge.usgs_url }}</p>
+    {% if report.upstream_gauge %}<p>{{ t.plan.upstream_label }} {{ report.upstream_gauge.name }} ({{ report.upstream_gauge.id }})</p>{% endif %}
+  </section>
+  {% endif %}
+
+  <section class="card">
+    <h2>{{ t.plan.contacts_title }}</h2>
+    <dl class="contacts">
+      {% for contact in t.plan.contacts %}<dt>{{ contact.name }}</dt><dd><a href="tel:{{ contact.number }}">{{ contact.number }}</a></dd>{% endfor %}
+    </dl>
+  </section>
+
+  <div class="actions no-print">
+    <button class="button primary" type="button" onclick="window.print()">{{ t.report.actions.print }}</button>
+    <a class="button" href="/report?site={{ site.id }}">← {{ t.report.title }}</a>
+  </div>
+</article>
+{% endblock %}
